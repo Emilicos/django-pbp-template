@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% block meta %}
+    <title> Create Wishlist </title>
+    {% endblock meta %}
+</head>
+
+<body>
+{% block content %}
+
+<div class = "flex flex-col items-center justify-center position-center login-color box-shadow">
+    <div class = "login rounded-md font-bold p-8 w-full max-w-720px">
+        <h1 class = "text-center">Create Task</h1>
+
+        <form method="POST" action="http://localhost:8000/wishlist/ajax/submit/">
+            {% csrf_token %}
+            <div class = "p-8">
+                <div class = "my-4">
+                    <p>Nama Barang: </p>
+                    <input type="text" name="nama_barang" placeholder="Nama Barang" class="form-control">
+                
+                </div>
+                        
+                <div class = "my-4">
+                    <p>Harga: </p>
+                    <input type="number" name="harga_barang" placeholder="Harga" class="form-control">
+                </div>
+                
+                <div class = "my-4">
+                    <p>Deskripsi: </p>
+                    <input type="description" name="deskripsi" placeholder="Deskripsi" class="form-control">
+                </div>
+
+                <div class = "text-center">
+                    <button class="btn btn-primary w-full" type="submit" id = "idForm"> Create Wishlist </button>
+                </div>
+            </div>
+        </form>
+     </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+    $("#idForm").submit(function(e) {
+        e.preventDefault();
+
+        var form = $(this);
+        var actionUrl = form.attr('action');
+
+        $.ajax({
+            type: "POST",
+            url: actionUrl,
+            data: form.serialize(), // serializes the form's elements.
+            success: function(data){
+                alert(data); // show response from the php script.
+            }
+        });
+
+    });
+</script>
+
+{% endblock content %}
+</body>
+</html>

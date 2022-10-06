@@ -68,9 +68,11 @@ def logout_user(request):
     response.delete_cookie('last_login')
     return response
 
+@login_required(login_url='/wishlist/login/')
 def show_wishlist_ajax(request):
     return render(request, "wishlist_ajax.html", {})
 
+@login_required(login_url='/wishlist/login/')
 def submit_ajax_form(request):
     if(request.method == "POST"):
         nama_barang = request.POST.get("nama_barang")

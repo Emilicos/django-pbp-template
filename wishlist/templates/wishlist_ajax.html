@@ -30,7 +30,7 @@
         <button><a href="{% url 'wishlist:logout' %}">Logout</a></button>
 
         
-        <form id = "idForm" method="POST" action="http://localhost:8000/wishlist/ajax/submit/">
+        <form id = "idForm" method="POST" action="/wishlist/ajax/submit/">
             {% csrf_token %}
             <div class = "p-8">
                 <div class = "my-4">
@@ -65,7 +65,7 @@
 
         <script>
             function showData(){
-                $.get("http://localhost:8000/wishlist/json/", function(data)
+                $.get("/wishlist/json/", function(data)
                     {   
                         $.each(data, function(i,data){
                             var th_nama_barang =
